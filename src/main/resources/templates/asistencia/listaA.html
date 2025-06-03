@@ -1,0 +1,87 @@
+<!-- departamento/listaD.html -->
+<div th:fragment="contenido" style="padding: 2rem; background: linear-gradient(135deg, #800000, #a52a2a, #b22222); min-height: 100%;">
+    <h2 class="text-center mb-4" style="
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 2.5rem;
+        background: linear-gradient(90deg, #b30000, #d4af37);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">
+        Asistencias
+    </h2>
+
+    <div class="text-end mb-3">
+        <a th:href="@{/asis/crear}" class="btn" style="
+            background: linear-gradient(90deg, #800000, #b22222);
+            color: #fff;
+            border: 2px solid #d4af37;
+            padding: 0.5rem 1.2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;">
+            <i class="fas fa-plus"></i> Nueva Asistencia
+        </a>
+    </div>
+
+    <div class="table-responsive bg-white p-3 rounded shadow-sm" style="
+        border: 2px solid #d4af37;
+        font-family: 'Montserrat', sans-serif;
+        box-shadow: 0 0 10px rgba(139, 0, 0, 0.2);">
+        <table class="table table-striped table-bordered text-center align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Empleado</th>
+                    <th>Fecha</th>
+                    <th>Hora Entrada</th>
+                    <th>Hora Salida</th>
+                    <th>Permiso</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="a : ${asistenciaA}">
+                    <td th:text="${a.id}"></td>
+                    <td th:text="${a.empleado != null} ? ${a.empleado.nombrecompleto} : 'Sin Empleado'"></td>
+                    <td th:text="${a.fecha}"></td>
+                    <td th:text="${a.horaentrada}"></td>
+                    <td th:text="${a.horasalida}"></td>
+                    <td th:text="${a.permiso != null} ? ${a.permiso.justificacion} : 'Sin razón'"></td>
+                    <td>
+                        <a th:href="@{/asis/editar/{id}(id=${a.id})}" class="btn btn-warning btn-sm me-1" style="border-radius: 6px;">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a th:href="@{/asis/eliminar/{id}(id=${a.id})}" class="btn btn-danger btn-sm" 
+                           onclick="return confirm('¿Seguro?')" style="border-radius: 6px;">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 2rem;
+        }
+
+        .table-responsive {
+            padding: 1rem;
+        }
+
+        .btn {
+            font-size: 0.9rem;
+            padding: 0.4rem 1rem;
+        }
+    }
+</style>

@@ -1,0 +1,58 @@
+<div th:fragment="contenido">
+    <h2 class="text-center">Asistencia</h2>
+
+    <form th:action="@{/asis/guardar}" th:object="${asistencia}" method="post"
+          class="p-4 border rounded bg-white shadow-sm col-md-8 mx-auto">
+        
+        <!-- ID solo visible en modo edición -->
+        <div th:if="${asistencia.id != null}" class="mb-3">
+            <label class="form-label">ID</label>
+            <input type="text" th:field="*{id}" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Empleado</label>
+            <select class="form-control" th:field="*{empleado.id}">
+                <option value="">-- Selecciona un empleado --</option>
+                <option th:each="p : ${empleados}"
+                        th:value="${p.id}"
+                        th:text="${p.nombrecompleto}"></option>
+            </select>
+            <small class="text-danger" th:if="${#fields.hasErrors('empleado')}" th:errors="*{empleado}"></small>
+        </div>
+
+		<div class="mb-3">
+	        <label class="form-label">Fecha</label>
+	        <input type="date" th:field="*{fecha}" class="form-control" required />
+	        <div th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}" class="text-danger"></div>
+        </div>
+
+        <div class="mb-3">
+		    <label class="form-label">Hora de Entrada</label>
+		    <input type="time" th:field="*{horaentrada}" class="form-control" required />
+		    <div th:if="${#fields.hasErrors('horaentrada')}" th:errors="*{horaentrada}" class="text-danger"></div>
+		</div>
+		
+		<div class="mb-3">
+		    <label class="form-label">Hora de Salida</label>
+		    <input type="time" th:field="*{horasalida}" class="form-control" required />
+		    <div th:if="${#fields.hasErrors('horasalida')}" th:errors="*{horasalida}" class="text-danger"></div>
+		</div>
+
+		<div class="mb-3">
+            <label class="form-label">Permiso</label>
+            <select class="form-control" th:field="*{permiso.id}">
+                <option value="">-- Selecciona un permiso --</option>
+                <option th:each="d : ${permisos}"
+                        th:value="${d.id}"
+                        th:text="${d.justificacion}"></option>
+            </select>
+            <small class="text-danger" th:if="${#fields.hasErrors('permiso')}" th:errors="*{permiso}"></small>
+        </div>
+
+        <div class="text-end">
+            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+            <a th:href="@{/asis/inicio}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>

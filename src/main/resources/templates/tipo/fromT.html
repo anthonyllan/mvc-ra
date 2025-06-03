@@ -1,0 +1,94 @@
+<div th:fragment="contenido" style="padding: 2rem; position: relative; min-height: 100%; 
+    background: linear-gradient(135deg, #800000, #a52a2a, #b22222);">
+    <h2 class="text-center mb-4" style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 2.5rem; 
+        background: linear-gradient(90deg, #b30000, #d4af37); -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">
+        Formulario Permiso
+    </h2>
+
+    <form th:action="@{/tipo/guardar}" th:object="${tipo}" method="post" 
+          class="p-4 border rounded bg-white shadow-sm col-md-8 mx-auto" 
+          style="background: rgba(255, 249, 242, 0.95); border: 2px solid #d4af37; border-radius: 10px; 
+                 box-shadow: 0 0 10px rgba(139, 0, 0, 0.2); font-family: 'Montserrat', sans-serif;">
+        
+        <!-- ID solo visible en modo edición -->
+        <div th:if="${tipo.id != null}" class="mb-3 position-relative">
+            <label class="form-label" style="font-weight: 600; color: #800000; display: flex; align-items: center;">
+                <i class="fas fa-id-badge me-1" style="color: #d4af37;"></i>ID
+            </label>
+            <input type="text" th:field="*{id}" class="form-control" readonly 
+                   style="border-radius: 6px; border: 1px solid #a52a2a; background-color: #fff9f2; 
+                          padding: 0.5rem; font-size: 1rem; transition: all 0.2s ease;" />
+        </div>
+
+        <div class="mb-3 position-relative">
+            <label class="form-label" style="font-weight: 600; color: #800000; display: flex; align-items: center;">
+                <i class="fas fa-tag me-1" style="color: #d4af37;"></i>Nombre
+            </label>
+            <input type="text" th:field="*{nombre}" class="form-control" required 
+                   style="border-radius: 6px; border: 1px solid #a52a2a; background-color: #fff9f2; 
+                          padding: 0.5rem; font-size: 1rem; transition: all 0.2s ease;" />
+            <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger mt-1"></div>
+        </div>
+        
+        <div class="mb-3 position-relative">
+            <label class="form-label" style="font-weight: 600; color: #800000; display: flex; align-items: center;">
+                <i class="fas fa-info-circle me-1" style="color: #d4af37;"></i>Descripción
+            </label>
+            <input type="text" th:field="*{descripcion}" class="form-control" required 
+                   style="border-radius: 6px; border: 1px solid #a52a2a; background-color: #fff9f2; 
+                          padding: 0.5rem; font-size: 1rem; transition: all 0.2s ease;" />
+            <div th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="text-danger mt-1"></div>
+        </div>
+
+        <div class="text-end">
+            <button type="submit" class="btn" style="background: linear-gradient(90deg, #800000, #b22222); color: #fff; 
+                border: 2px solid #d4af37; padding: 0.5rem 1.5rem; border-radius: 10px; font-weight: 600; 
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: all 0.3s ease;">
+                <i class="fas fa-save me-1"></i>Guardar
+            </button>
+            <a th:href="@{/tipo/inicio}" class="btn" style="background: linear-gradient(90deg, #d4af37, #800000); color: #fff; 
+                border: 2px solid #800000; padding: 0.5rem 1.5rem; border-radius: 10px; font-weight: 600; 
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: all 0.3s ease; margin-left: 1rem;">
+                Cancelar
+            </a>
+        </div>
+    </form>
+</div>
+<style>
+    .form-control:focus {
+        border-color: #b22222;
+        box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+        transform: scale(1.02);
+    }
+
+    .form-control:hover {
+        box-shadow: 0 2px 5px rgba(139, 0, 0, 0.2);
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 2rem;
+        }
+
+        form {
+            padding: 1.5rem;
+            margin: 0.5rem;
+        }
+
+        .form-control {
+            padding: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            padding: 0.4rem 1.2rem;
+            font-size: 0.9rem;
+        }
+    }
+</style>

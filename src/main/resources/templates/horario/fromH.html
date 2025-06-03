@@ -1,0 +1,119 @@
+<div th:fragment="contenido" style="padding: 2rem; position: relative; min-height: 100%; 
+    background: linear-gradient(135deg, #800000, #a52a2a, #b22222);">
+    <h2 class="text-center mb-4" style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 2.5rem; 
+        background: linear-gradient(90deg, #b30000, #d4af37); -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">
+        Horarios
+    </h2>
+
+    <form th:action="@{/hora/guardar}" th:object="${horario}" method="post" 
+          class="p-4 border rounded bg-white shadow-sm col-md-8 mx-auto" 
+          style="background: rgba(255, 249, 242, 0.95); border: 2px solid #d4af37; border-radius: 10px; 
+                 box-shadow: 0 0 10px rgba(139, 0, 0, 0.2); font-family: 'Montserrat', sans-serif;">
+        
+        <!-- ID solo visible en modo edición -->
+        <div th:if="${horario.id != null}" class="mb-3 position-relative">
+            <label class="form-label" style="font-weight: 600; color: #800000; display: flex; align-items: center;">
+                <i class="fas fa-id-badge me-1" style="color: #d4af37;"></i>ID
+            </label>
+            <input type="text" th:field="*{id}" class="form-control" readonly 
+                   style="border-radius: 6px; border: 1px solid #a52a2a; background-color: #fff9f2; 
+                          padding: 0.5rem; font-size: 1rem; transition: all 0.2s ease;" />
+        </div>
+
+        <div class="mb-3 position-relative">
+            <label class="form-label" style="font-weight: 600; color: #800000; display: flex; align-items: center;">
+                <i class="fas fa-user me-1" style="color: #d4af37;"></i>Empleado
+            </label>
+            <select class="form-control" th:field="*{empleado.id}" 
+                    style="border-radius: 6px; border: 1px solid #a52a2a; background-color: #fff9f2; 
+                           padding: 0.5rem; font-size: 1rem; transition: all 0.2s ease;">
+                <option value="">-- Selecciona un empleado --</option>
+                <option th:each="p : ${empleados}"
+                        th:value="${p.id}"
+                        th:text="${p.nombrecompleto}"></option>
+            </select>
+            <small class="text-danger" th:if="${#fields.hasErrors('empleado')}" th:errors="*{empleado}" style="margin-top: 0.25rem;"></small>
+        </div>
+
+        <div class="mb-3 position-relative">
+            <label class="form-label" style="font-weight: 600; color: #800000; display: flex; align-items: center;">
+                <i class="fas fa-clock me-1" style="color: #d4af37;"></i>Hora de Entrada
+            </label>
+            <input type="time" th:field="*{horaentrada}" class="form-control" required 
+                   style="border-radius: 6px; border: 1px solid #a52a2a; background-color: #fff9f2; 
+                          padding: 0.5rem; font-size: 1rem; transition: all 0.2s ease;" />
+            <div th:if="${#fields.hasErrors('horaentrada')}" th:errors="*{horaentrada}" class="text-danger mt-1"></div>
+        </div>
+
+        <div class="mb-3 position-relative">
+            <label class="form-label" style="font-weight: 600; color: #800000; display: flex; align-items: center;">
+                <i class="fas fa-clock me-1" style="color: #d4af37;"></i>Hora de Salida
+            </label>
+            <input type="time" th:field="*{horasalida}" class="form-control" required 
+                   style="border-radius: 6px; border: 1px solid #a52a2a; background-color: #fff9f2; 
+                          padding: 0.5rem; font-size: 1rem; transition: all 0.2s ease;" />
+            <div th:if="${#fields.hasErrors('horasalida')}" th:errors="*{horasalida}" class="text-danger mt-1"></div>
+        </div>
+
+        <div class="mb-3 position-relative">
+            <label class="form-label" style="font-weight: 600; color: #800000; display: flex; align-items: center;">
+                <i class="fas fa-calendar-day me-1" style="color: #d4af37;"></i>Días
+            </label>
+            <input type="text" th:field="*{diastrabajar}" class="form-control" required 
+                   style="border-radius: 6px; border: 1px solid #a52a2a; background-color: #fff9f2; 
+                          padding: 0.5rem; font-size: 1rem; transition: all 0.2s ease;" />
+            <div th:if="${#fields.hasErrors('diastrabajar')}" th:errors="*{diastrabajar}" class="text-danger mt-1"></div>
+        </div>
+
+        <div class="text-end">
+            <button type="submit" class="btn" style="background: linear-gradient(90deg, #800000, #b22222); color: #fff; 
+                border: 2px solid #d4af37; padding: 0.5rem 1.5rem; border-radius: 10px; font-weight: 600; 
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: all 0.3s ease;">
+                <i class="fas fa-save me-1"></i>Guardar
+            </button>
+            <a th:href="@{/hora/inicio}" class="btn" style="background: linear-gradient(90deg, #d4af37, #800000); color: #fff; 
+                border: 2px solid #800000; padding: 0.5rem 1.5rem; border-radius: 10px; font-weight: 600; 
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: all 0.3s ease; margin-left: 1rem;">
+                Cancelar
+            </a>
+        </div>
+    </form>
+</div>
+<style>
+    .form-control:focus, select.form-control:focus {
+        border-color: #b22222;
+        box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+        transform: scale(1.02);
+    }
+
+    .form-control:hover, select.form-control:hover {
+        box-shadow: 0 2px 5px rgba(139, 0, 0, 0.2);
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 2rem;
+        }
+
+        form {
+            padding: 1.5rem;
+            margin: 0.5rem;
+        }
+
+        .form-control, select.form-control {
+            padding: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            padding: 0.4rem 1.2rem;
+            font-size: 0.9rem;
+        }
+    }
+</style>

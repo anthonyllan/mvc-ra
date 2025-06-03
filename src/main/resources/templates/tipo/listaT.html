@@ -1,0 +1,55 @@
+<div th:fragment="contenido" style="padding: 2rem;">
+    <h2 class="text-center mb-4"
+        style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 2.5rem;
+        background: linear-gradient(90deg, #b30000, #d4af37);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">
+        Tipos de Permiso
+    </h2>
+
+    <div class="text-end mb-4">
+        <a th:href="@{/tipo/crear}" class="btn"
+            style="background: linear-gradient(90deg, #800000, #b22222); color: #fff;
+            border: 2px solid #d4af37; padding: 0.5rem 1.5rem; border-radius: 10px;
+            font-weight: 600; font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: all 0.3s ease;">
+            <i class="fas fa-plus me-1"></i> Nuevo Tipo
+        </a>
+    </div>
+
+    <div class="table-responsive rounded" style="box-shadow: 0 0 10px rgba(139, 0, 0, 0.2);">
+        <table class="table table-bordered">
+            <thead class="text-center"
+                style="background: linear-gradient(90deg, #800000, #a52a2a); color: #fff;
+                font-family: 'Montserrat', sans-serif; font-weight: bold;">
+                <tr>
+                    <th style="padding: 1rem;">ID</th>
+                    <th style="padding: 1rem;">Nombre</th>
+                    <th style="padding: 1rem;">Descripción</th>
+                    <th style="padding: 1rem;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody style="background-color: #fff9f2; font-family: 'Montserrat', sans-serif;">
+                <tr th:each="t : ${tipoT}" style="transition: background-color 0.2s;">
+                    <td th:text="${t.id}" style="padding: 0.85rem; vertical-align: middle;"></td>
+                    <td th:text="${t.nombre}" style="padding: 0.85rem; vertical-align: middle;"></td>
+                    <td th:text="${t.descripcion}" style="padding: 0.85rem; vertical-align: middle;"></td>
+                    <td class="text-center" style="padding: 0.85rem; vertical-align: middle;">
+                        <a th:href="@{/tipo/editar/{id}(id=${t.id})}"
+                            style="background: linear-gradient(90deg, #d4af37, #800000);
+                            color: white; padding: 0.35rem 0.9rem; border-radius: 6px;
+                            font-size: 0.9rem; margin-right: 0.5rem; transition: all 0.2s;">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a th:href="@{/tipo/eliminar/{id}(id=${t.id})}"
+                            onclick="return confirm('¿Seguro?')"
+                            style="background: linear-gradient(90deg, #8b0000, #4b0000);
+                            color: white; padding: 0.35rem 0.9rem; border-radius: 6px;
+                            font-size: 0.9rem; transition: all 0.2s;">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

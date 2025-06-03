@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - GS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts: Montserrat and Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --vino-principal: #6d1a1a; /* Deep burgundy */
+            --vino-secundario: #8b2a2a; /* Slightly lighter burgundy */
+            --vino-claro: #a83a3a; /* Light burgundy accent */
+            --dorado: #d4af37; /* Gold for highlights */
+            --crema: #f5f0e6; /* Soft cream for contrast */
+            --texto-oscuro: #2c2c2c; /* Dark text */
+            --texto-claro: #ffffff; /* White text */
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: url('https://static.vecteezy.com/system/resources/previews/022/445/828/non_2x/red-wine-brick-wallpaper-gradient-colorful-block-background-abstract-free-photo.jpeg');
+            background-blend-mode: overlay;
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--texto-oscuro);
+            margin: 0;
+        }
+
+        .register-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            width: 100%;
+            max-width: 500px;
+            backdrop-filter: blur(5px); /* Optional: Adds a frosted glass effect */
+        }
+
+        .register-header {
+            background: linear-gradient(90deg, var(--vino-principal), var(--vino-secundario), var(--vino-claro));
+            color: var(--texto-claro);
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 2px solid var(--dorado);
+        }
+
+        .register-header h2 {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, var(--dorado), var(--texto-claro));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .register-header i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dorado);
+            transition: transform 0.3s ease;
+        }
+
+        .register-header:hover i {
+            transform: scale(1.1);
+        }
+
+        .register-body {
+            padding: 2rem;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 12px 15px;
+            border: 2px solid rgba(168, 58, 58, 0.3);
+            margin-bottom: 1.5rem;
+            background-color: rgba(245, 240, 230, 0.8);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--vino-claro);
+            box-shadow: 0 0 0 0.25rem rgba(168, 58, 58, 0.25);
+        }
+
+        .btn-register {
+            background: linear-gradient(90deg, var(--vino-principal), var(--vino-secundario));
+            color: var(--texto-claro);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 1.5rem;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-register:hover {
+            background: linear-gradient(90deg, var(--vino-claro), var(--vino-principal));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(109, 26, 26, 0.3);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .login-link a {
+            color: var(--vino-principal);
+            font-weight: 600;
+            text-decoration: none;
+            background: linear-gradient(90deg, var(--vino-principal), var(--vino-secundario));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: var(--dorado);
+            text-decoration: underline;
+        }
+
+        .alert {
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            background: rgba(245, 240, 230, 0.9);
+            border: 1px solid var(--vino-claro);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 576px) {
+            .register-container {
+                margin: 1rem;
+                max-width: 90%;
+            }
+
+            .register-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .register-header i {
+                font-size: 2rem;
+            }
+
+            .register-body {
+                padding: 1.5rem;
+            }
+
+            .form-control {
+                padding: 10px 12px;
+                margin-bottom: 1rem;
+            }
+
+            .btn-register {
+                padding: 10px 15px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-header">
+            <i class="fas fa-user-plus"></i>
+            <h2>Registro de usuario</h2>
+        </div>
+        
+        <div class="register-body">
+            <!-- Mensaje de éxito -->
+            <div th:if="${param.exito}" class="alert alert-info">
+                Se ha registrado exitosamente en la aplicación
+            </div>
+            
+            <form th:action="@{/registro}" method="post" th:object="${usuario}">
+                <!-- Nombre -->
+                <div class="form-group">
+                    <label class="control-label" for="nombre">
+                        <i class="fas fa-user me-2"></i>Nombre
+                    </label>
+                    <input id="nombre" type="text" class="form-control" 
+                           th:field="*{nombre}" required autofocus
+                           placeholder="Ingresa tu nombre">
+                </div>
+                
+                <!-- Apellido -->
+                <div class="form-group">
+                    <label class="control-label" for="apellido">
+                        <i class="fas fa-user me-2"></i>Apellido
+                    </label>
+                    <input id="apellido" type="text" class="form-control" 
+                           th:field="*{apellido}" required
+                           placeholder="Ingresa tu apellido">
+                </div>
+                
+                <!-- Email -->
+                <div class="form-group">
+                    <label class="control-label" for="email">
+                        <i class="fas fa-envelope me-2"></i>Email
+                    </label>
+                    <input id="email" type="email" class="form-control" 
+                           th:field="*{email}" required
+                           placeholder="Ingresa tu email">
+                </div>
+                
+                <!-- Password -->
+                <div class="form-group">
+                    <label class="control-label" for="password">
+                        <i class="fas fa-lock me-2"></i>Contraseña
+                    </label>
+                    <input type="password" id="password" class="form-control" 
+                           th:field="*{password}" required
+                           placeholder="Crea una contraseña">
+                </div>
+                
+                <button type="submit" class="btn btn-register">
+                    <i class="fas fa-user-plus me-2"></i>Registrarse
+                </button>
+                
+                <div class="login-link">
+                    ¿Ya tienes una cuenta? <a th:href="@{/login}">Inicia sesión aquí</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

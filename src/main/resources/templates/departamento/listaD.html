@@ -1,0 +1,96 @@
+<div th:fragment="contenido" style="padding: 2rem; position: relative; min-height: 100%; 
+    background: linear-gradient(135deg, #800000, #a52a2a, #b22222);">
+    <div class="container">
+        <h2 class="text-center mb-4" style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 2.5rem; 
+            background: linear-gradient(90deg, #b30000, #d4af37); -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">
+            Departamentos
+        </h2>
+
+        <div class="text-end mb-3">
+            <a th:href="@{/depa/crear}" class="btn" style="background: linear-gradient(90deg, #800000, #b22222); color: #fff; 
+                border: 2px solid #d4af37; padding: 0.5rem 1.5rem; border-radius: 10px; font-weight: 600; 
+                font-family: 'Montserrat', sans-serif; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: all 0.3s ease;">
+                <i class="fas fa-plus me-1"></i> Nuevo Departamento
+            </a>
+        </div>
+
+        <div class="table-responsive rounded" style="box-shadow: 0 0 10px rgba(139, 0, 0, 0.2); 
+            background: rgba(255, 249, 242, 0.95); border: 2px solid #d4af37; border-radius: 10px;">
+            <table class="table table-striped table-hover">
+                <thead class="text-center" style="background: linear-gradient(90deg, #800000, #a52a2a); color: #fff; 
+                    font-family: 'Montserrat', sans-serif; font-weight: bold;">
+                    <tr>
+                        <th style="padding: 1rem; vertical-align: middle;">ID</th>
+                        <th style="padding: 1rem; vertical-align: middle;">Nombre</th>
+                        <th style="padding: 1rem; vertical-align: middle;">Descripción</th>
+                        <th style="padding: 1rem; vertical-align: middle;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody style="background-color: #fff9f2; font-family: 'Montserrat', sans-serif; transition: background-color 0.2s;">
+                    <tr th:each="dep : ${departamentoD}">
+                        <td th:text="${dep.id}" style="padding: 0.85rem; vertical-align: middle;"></td>
+                        <td th:text="${dep.nombre_dep}" style="padding: 0.85rem; vertical-align: middle;"></td>
+                        <td th:text="${dep.descripcion}" style="padding: 0.85rem; vertical-align: middle;"></td>
+                        <td class="text-center" style="padding: 0.85rem; vertical-align: middle;">
+                            <a th:href="@{/depa/editar/{id}(id=${dep.id})}" class="btn btn-warning btn-sm me-1" 
+                               style="background: linear-gradient(90deg, #d4af37, #800000); color: white; 
+                                      padding: 0.35rem 0.9rem; border-radius: 6px; font-size: 0.9rem; 
+                                      transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a th:href="@{/depa/eliminar/{id}(id=${dep.id})}" class="btn btn-danger btn-sm" 
+                               style="background: linear-gradient(90deg, #8b0000, #4b0000); color: white; 
+                                      padding: 0.35rem 0.9rem; border-radius: 6px; font-size: 0.9rem; 
+                                      transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.2);"
+                               onclick="return confirm('¿Seguro?')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .table-responsive {
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    tbody tr:hover {
+        background: linear-gradient(90deg, #fff9f2, rgba(178, 34, 34, 0.05));
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(139, 0, 0, 0.1);
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 2rem;
+        }
+
+        .table-responsive {
+            margin: 0.5rem;
+        }
+
+        th, td {
+            padding: 0.6rem;
+            font-size: 0.85rem;
+        }
+
+        .btn {
+            padding: 0.3rem 0.7rem;
+            font-size: 0.8rem;
+        }
+    }
+</style>

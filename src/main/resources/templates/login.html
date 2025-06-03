@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de sesión - GS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Google Fonts: Montserrat and Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --vino-principal: #6d1a1a; /* Deep burgundy */
+            --vino-secundario: #8b2a2a; /* Slightly lighter burgundy */
+            --vino-claro: #a83a3a; /* Light burgundy accent */
+            --dorado: #d4af37; /* Gold for highlights */
+            --crema: #f5f0e6; /* Soft cream for contrast */
+            --texto-oscuro: #212529; /* Dark text */
+            --texto-claro: #ffffff; /* White text */
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background:  
+                        url('https://png.pngtree.com/thumb_back/fw800/background/20231224/pngtree-illustration-of-a-textured-background-with-red-ombre-mosaic-design-image_13836054.png') no-repeat center center fixed;
+            background-size: cover;
+            background-blend-mode: overlay;
+            margin: 0;
+        }
+
+        .login-container {
+            max-width: 500px;
+            margin: auto;
+            padding: 2.5rem;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(245, 240, 230, 0.9));
+            border-radius: 12px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            border-top: 5px solid var(--vino-principal);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dorado);
+            transition: transform 0.3s ease;
+        }
+
+        .login-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 2rem;
+            background: linear-gradient(90deg, var(--vino-principal), var(--vino-secundario));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .login-header:hover i {
+            transform: scale(1.1);
+        }
+
+        .form-control {
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            border: 1px solid rgba(168, 58, 58, 0.3);
+            background: rgba(245, 240, 230, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--vino-claro);
+            box-shadow: 0 0 0 0.25rem rgba(168, 58, 58, 0.25);
+        }
+
+        .btn-login {
+            background: linear-gradient(90deg, var(--vino-principal), var(--vino-secundario));
+            color: var(--texto-claro);
+            padding: 0.75rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-login:hover {
+            background: linear-gradient(90deg, var(--vino-claro), var(--vino-principal));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(109, 26, 26, 0.3);
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--texto-oscuro);
+        }
+
+        .register-link a {
+            color: var(--vino-principal);
+            font-weight: 500;
+            text-decoration: none;
+            background: linear-gradient(90deg, var(--vino-principal), var(--vino-secundario));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: color 0.3s ease;
+        }
+
+        .register-link a:hover {
+            color: var(--dorado);
+            text-decoration: underline;
+        }
+
+        .alert {
+            border-radius: 6px;
+            padding: 1rem;
+        }
+
+        .alert-danger {
+            background: rgba(220, 53, 69, 0.1);
+            border-left: 4px solid #dc3545;
+            color: #dc3545;
+        }
+
+        .alert-success {
+            background: rgba(25, 135, 84, 0.1);
+            border-left: 4px solid #198754;
+            color: #198754;
+        }
+
+        .input-group-text {
+            background: linear-gradient(90deg, var(--crema), #f8e6e6);
+            border-right: none;
+            color: var(--vino-principal);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 576px) {
+            .login-container {
+                margin: 1rem;
+                padding: 1.5rem;
+                max-width: 90%;
+            }
+
+            .login-header h2 {
+                font-size: 1.6rem;
+            }
+
+            .login-header i {
+                font-size: 2rem;
+            }
+
+            .form-control {
+                padding: 0.6rem 0.8rem;
+            }
+
+            .btn-login {
+                padding: 0.6rem;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <i class="fas fa-sign-in-alt"></i>
+            <h2>Inicio de sesión</h2>
+        </div>
+        
+        <div class="login-body">
+            <!-- Mensaje de error -->
+            <div th:if="${param.error}" class="alert alert-danger">
+                <i class="fas fa-exclamation-circle me-2"></i>Usuario o contraseña inválidos
+            </div>
+            
+            <!-- Mensaje de logout -->
+            <div th:if="${param.logout}" class="alert alert-success">
+                <i class="fas fa-check-circle me-2"></i>Ha cerrado sesión exitosamente
+            </div>
+            
+            <form th:action="@{/login}" method="post">
+                <!-- Usuario -->
+                <div class="form-group mb-3">
+                    <label for="username" class="form-label">
+                        <i class="fas fa-user me-2"></i>Nombre
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        <input id="username" name="username" type="text" class="form-control"
+                               required autofocus placeholder="Digite su email ID">
+                    </div>
+                </div>
+                
+                <!-- Contraseña -->
+                <div class="form-group mb-4">
+                    <label for="password" class="form-label">
+                        <i class="fas fa-lock me-2"></i>Contraseña
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        <input type="password" class="form-control" id="password" name="password" 
+                               placeholder="Ingresa tu contraseña" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-login">
+                    <i class="fas fa-sign-in-alt me-2"></i>Iniciar sesión
+                </button>
+                
+                <div class="register-link">
+                    ¿No tienes una cuenta? <a th:href="@{/registro}">Regístrate aquí</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
